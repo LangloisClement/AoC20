@@ -8,9 +8,13 @@ namespace AoC20
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             Console.WriteLine("Hello world");
+            Console.WriteLine(Day1.CalculeSolution("../../Input/inputD1.txt"));
+
+
             Console.ReadLine();
         }
     }
