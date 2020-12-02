@@ -36,5 +36,28 @@ namespace AoC20
             if (memo >= min) return 1;
             else return 0;
         }
+
+        public static int NbrPasswordCorige(string addr)
+        {
+            if (!System.IO.File.Exists(addr)) return -1;
+            int r = 0;
+            foreach(string s in System.IO.File.ReadAllLines(addr))
+            {
+                r += VerifPasswordCorige(s);
+            }
+            return r;
+        }
+
+        private static int VerifPasswordCorige(string s)
+        {
+            string[] temp = s.Split(':');
+            string pass = temp[1];
+            char verif = temp[0][temp[0].Length - 1];
+            int min = Int32.Parse(temp[0].Split('-')[0]);
+            int max = Int32.Parse(temp[0].Split('-')[1].Split(' ')[0]);
+            if (pass[min] == verif && pass[max] != verif) return 1;
+            if (pass[min] != verif && pass[max] == verif) return 1;
+            return 0;
+        }
     }
 }

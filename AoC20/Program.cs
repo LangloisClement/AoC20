@@ -13,7 +13,7 @@ namespace AoC20
         {
             Console.WriteLine("Hello world");
             //Console.WriteLine(Day1.CalculeSolutionFor3("../../Input/inputD1.txt"));
-            Console.WriteLine(Day2.NbrPassword("../../Input/inputD2.txt"));
+            Console.WriteLine(Day2.NbrPasswordCorige("../../Input/inputD2.txt"));
 
             Console.ReadLine();
         }
