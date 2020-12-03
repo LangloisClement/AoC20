@@ -33,15 +33,16 @@ namespace AoC20
             }
         }
 
-        public int Reponse()
+        public uint Reponse(int down,int right)
         {
-            int r = 0, i = 0, j = 0;
+            uint r = 0;
+            int i = 0, j = 0;
             while (i < terrain.GetLength(0))
             {
                 if (terrain[i, j]) r++;
-                i++;
-                int a = j + 3 - terrain.GetLength(1);
-                if (a < 0) j += 3;
+                i+=down;
+                int a = j + right - terrain.GetLength(1);
+                if (a < 0) j += right;
                 else j = a;
             }
 
