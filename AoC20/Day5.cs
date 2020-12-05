@@ -8,10 +8,11 @@ namespace AoC20
 {
     class Day5
     {
-        public static int MaxBoardId(string addr)
+        List<int> listId = new List<int>();
+
+        public Day5(string addr)
         {
-            if (!System.IO.File.Exists(addr)) return -1;
-            List<int> listId = new List<int>();
+            if (!System.IO.File.Exists(addr)) listId = null;
             foreach (string s in System.IO.File.ReadAllLines(addr))
             {
                 int row = 0, column = 0;
@@ -25,9 +26,21 @@ namespace AoC20
                 }
                 listId.Add((row * 8) + column);
             }
-            return listId.Max();
         }
 
+        public int MaxBoardId
+        {
+            get => listId.Max();
+        }
 
+        public int GetSeat()
+        {
+            listId.Sort();
+            for(int i = 0; i < listId.Count-1; i++)
+            {
+                if (listId[i] + 1 != listId[i + 1]) return listId[i] + 1;
+            }
+            return -1;
+        }
     }
 }
