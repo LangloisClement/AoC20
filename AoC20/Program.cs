@@ -18,8 +18,10 @@ namespace AoC20
             uint a = test.Reponse(1, 1), b = test.Reponse(1, 3), c = test.Reponse(1, 5), d = test.Reponse(1, 7), e = test.Reponse(2, 1);
             Console.WriteLine(a*b*c*d*e);*/
             //Console.WriteLine(new Day4("../../Input/inputD4.txt").Verrif());
-            Day5 test = new Day5("../../Input/inputD5.txt");
-            Console.WriteLine(test.GetSeat());
+            /*Day5 test = new Day5("../../Input/inputD5.txt");
+            Console.WriteLine(test.GetSeat());*/
+            Console.WriteLine(new Day6("../../Input/inputD6.txt").NbrRep());
+
             Console.ReadLine();
         }
     }
