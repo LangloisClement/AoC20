@@ -23,9 +23,9 @@ namespace AoC20
                 string[] data = System.IO.File.ReadAllLines(addr);
                 int i = 0;
                 listGroupe.Add(new List<char>());
-                if (part == 1)
+                while (i < data.Length)
                 {
-                    while (i < data.Length)
+                    if (part == 1)
                     {
                         if (data[i] == "") listGroupe.Add(new List<char>());
                         else
@@ -35,12 +35,8 @@ namespace AoC20
                                 if (!listGroupe[listGroupe.Count - 1].Contains(c)) listGroupe[listGroupe.Count - 1].Add(c);
                             }
                         }
-                        i++;
                     }
-                }
-                else
-                {
-                    while (i < data.Length)
+                    else
                     {
                         if (data[i] == "")
                         {
@@ -64,8 +60,8 @@ namespace AoC20
                         {
                             repGroupe.Add(data[i]);
                         }
-                        i++;
                     }
+                    i++;
                 }
             }
         }
