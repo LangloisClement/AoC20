@@ -10,7 +10,7 @@ namespace AoC20
     {
         List<List<char>> listGroupe = new List<List<char>>();
 
-        public Day6(string addr)
+        public Day6(string addr, int part)
         {
             if (!System.IO.File.Exists(addr))
             {
@@ -19,32 +19,65 @@ namespace AoC20
             }
             else
             {
+                List<string> repGroupe = new List<string>();
                 string[] data = System.IO.File.ReadAllLines(addr);
                 int i = 0;
                 listGroupe.Add(new List<char>());
-                while (i < data.Length)
+                if (part == 1)
                 {
-                    if (data[i] == "") listGroupe.Add(new List<char>());
-                    else
+                    while (i < data.Length)
                     {
-                        foreach (char c in data[i])
+                        if (data[i] == "") listGroupe.Add(new List<char>());
+                        else
                         {
-                            if (!listGroupe[listGroupe.Count - 1].Contains(c)) listGroupe[listGroupe.Count - 1].Add(c);
+                            foreach (char c in data[i])
+                            {
+                                if (!listGroupe[listGroupe.Count - 1].Contains(c)) listGroupe[listGroupe.Count - 1].Add(c);
+                            }
                         }
+                        i++;
                     }
-                    i++;
+                }
+                else
+                {
+                    while (i < data.Length)
+                    {
+                        if (data[i] == "")
+                        {
+                            foreach (char c in repGroupe[0])
+                            {
+                                bool flag = true;
+                                foreach (string s in repGroupe)
+                                {
+                                    if (!s.Contains(c))
+                                    {
+                                        flag = false;
+                                        break;
+                                    }
+                                }
+                                if (flag) listGroupe[listGroupe.Count - 1].Add(c);
+                            }
+                            repGroupe.Clear();
+                            listGroupe.Add(new List<char>());
+                        }
+                        else
+                        {
+                            repGroupe.Add(data[i]);
+                        }
+                        i++;
+                    }
                 }
             }
         }
 
-        public int NbrRep()
+        public int NbrRep
         {
-            int r = 0;
-            foreach(List<char> l in listGroupe)
+            get
             {
-                r += l.Count;
+                int r = 0;
+                foreach (List<char> l in listGroupe) r += l.Count;
+                return r;
             }
-            return r;
         }
 
 
