@@ -20,8 +20,8 @@ namespace AoC20
             //Console.WriteLine(new Day4("../../Input/inputD4.txt").Verrif());
             /*Day5 test = new Day5("../../Input/inputD5.txt");
             Console.WriteLine(test.GetSeat());*/
-            Console.WriteLine(new Day6("../../Input/inputD6.txt",2).NbrRep);
-
+            //Console.WriteLine(new Day6("../../Input/inputD6.txt",2).NbrRep);
+            Day7 day7 = new Day7("../../Input/inputD7.txt");
             Console.ReadLine();
         }
     }
