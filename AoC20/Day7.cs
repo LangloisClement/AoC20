@@ -61,4 +61,65 @@ namespace AoC20
         public List<Bag> Regle { get => regle; set => regle = value; }
         internal List<Bag> RepPart1 { get => repPart1; set => repPart1 = value; }
     }
+    class Day7Bis
+    {
+        Dictionary<string, List<Tuple<int, string>>> regle = new Dictionary<string, List<Tuple<int, string>>>();
+        List<string> repPart1 = new List<string>();
+
+        public Day7Bis(string addr)
+        {
+            if (!System.IO.File.Exists(addr))
+            {
+                regle = null;
+                Console.WriteLine("FILE NOT FOUND");
+            }
+            else
+            {
+                foreach (string s in System.IO.File.ReadAllLines(addr))
+                {
+                    string[] temp = s.Split(' ');
+                    string color = temp[0] + " " + temp[1];
+                    if (!regle.ContainsKey(color))
+                    {
+                        regle[color] = new List<Tuple<int, string>>();
+                        int i = 4;
+                        while (i < temp.Length)
+                        {
+                            if (Int32.TryParse(temp[i], out int n))
+                            {
+                                regle[color].Add(new Tuple<int, string>(n, temp[i + 1] + " " + temp[i + 2]));
+                            }
+                            i++;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void Part1(string recherche)
+        {
+            foreach (var v in regle) //pour chaque couleur
+            {
+                Recursif(recherche, v.Key);
+            }
+        }
+
+        void Recursif(string recherche, string color)
+        {
+            if (!repPart1.Contains(color)) //si pas dans la liste
+            {
+                foreach (var v in regle[color]) //pour chaque sac dans la couleur en cours
+                {
+                    if (v.Item2 == recherche || repPart1.Contains(v.Item2)) //si c'est ce qu'on cherhce
+                    {
+                        repPart1.Add(color); //ajoute la couleur
+                    }
+                    else
+                    {
+                        Recursif(recherche, v.Item2);
+                    }
+                }
+            }
+        }
+    }
 }

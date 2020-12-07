@@ -21,7 +21,9 @@ namespace AoC20
             /*Day5 test = new Day5("../../Input/inputD5.txt");
             Console.WriteLine(test.GetSeat());*/
             //Console.WriteLine(new Day6("../../Input/inputD6.txt",2).NbrRep);
-            Day7 day7 = new Day7("../../Input/inputD7.txt");
+            Day7Bis day7 = new Day7Bis("../../Input/inputD7.txt");
+            day7.Part1("shiny gold");
+            //day7.Part1("shiny gold");
             Console.ReadLine();
         }
     }
