@@ -41,7 +41,7 @@ namespace AoC20
 
             //DAY 8
             Day8 day8 = new Day8("../../Input/inputD8.txt");
-            Console.WriteLine(day8.Execut());
+            Console.WriteLine(day8.Repair());
 
             Console.ReadLine();
         }

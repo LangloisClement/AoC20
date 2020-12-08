@@ -27,6 +27,8 @@ namespace AoC20
     class Day8
     {
         List<Instruction> prog = new List<Instruction>();
+        bool terminate = false;
+
 
         public Day8(string addr)
         {
@@ -70,7 +72,32 @@ namespace AoC20
                     }
                 }
             }
+            terminate = true;
             return r;
+        }
+
+        public int Repair()
+        {
+            for(int i = 0; i < prog.Count; i++)
+            {
+                if (prog[i].TypeInst == "jmp")
+                {
+                    prog[i].TypeInst = "nop";
+                    int r = Execut();
+                    if (terminate) return r;
+                    else prog[i].TypeInst = "jmp";
+                }
+                else if (prog[i].TypeInst == "nop")
+                {
+                    prog[i].TypeInst = "jmp";
+                    int r = Execut();
+                    if (terminate) return r;
+                    else prog[i].TypeInst = "nop";
+                }
+                foreach (var inst in prog) inst.Exe = false;
+            }
+            Console.WriteLine("NOPE");
+            return -1;
         }
     }
 }
