@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AoC20
 {
-   class Day7
+    class Day7
     {
 
         Dictionary<string, Tuple<List<Tuple<int, string>>, List<string>>> regle = new Dictionary<string, Tuple<List<Tuple<int, string>>, List<string>>>();
@@ -81,9 +81,9 @@ namespace AoC20
 
         public List<string> RepPart1 { get => repPart1; set => repPart1 = value; }
 
-        public void RechercheParent(string recherche,string color)
+        public void RechercheParent(string recherche, string color)
         {
-            foreach(var v in regle[color].Item2)
+            foreach (var v in regle[color].Item2)
             {
                 if (!repPart1.Contains(v))
                 {
@@ -91,6 +91,27 @@ namespace AoC20
                     RechercheParent(recherche, v);
                 }
             }
+        }
+
+        public int NbrEnfant(string color)
+        {
+            int r = 0;
+            if (regle[color].Item1.Count == 0) return 1;
+            foreach (var v in regle[color].Item1)
+            {
+                r += v.Item1 * NbrEnfantRec(v.Item2);
+            }
+            return r;
+        }
+        public int NbrEnfantRec(string color)
+        {
+            int r = 0;
+            if (regle[color].Item1.Count == 0) return 1;
+            foreach (var v in regle[color].Item1)
+            {
+                r += v.Item1 * NbrEnfantRec(v.Item2);
+            }
+            return ++r;
         }
     }
 }
