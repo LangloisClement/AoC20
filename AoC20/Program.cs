@@ -40,8 +40,13 @@ namespace AoC20
             //Console.WriteLine(day7.NbrEnfant("shiny gold"));
 
             //DAY 8
-            Day8 day8 = new Day8("../../Input/inputD8.txt");
-            Console.WriteLine(day8.Repair());
+            //Day8 day8 = new Day8("../../Input/inputD8.txt");
+            //Console.WriteLine(day8.Repair());
+
+            //DAY 9
+            Day9 day9 = new Day9("../../Input/inputD9.txt");
+            Console.WriteLine(day9.Test(25));
+
 
             Console.ReadLine();
         }
