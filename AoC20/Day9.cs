@@ -42,7 +42,6 @@ namespace AoC20
 
         private bool Combinaison(int v, int taillePrean)
         {
-            bool r = false;
             for (int i = 0; i < taillePrean; i++)
             {
                 for (int j = i; j < taillePrean; j++)
@@ -50,7 +49,29 @@ namespace AoC20
                     if (code[i + (v - taillePrean)] + code[j + (v - taillePrean)] == code[v] && code[i + (v - taillePrean)] != code[j + (v - taillePrean)]) return true;
                 }
             }
-            return r;
+            return false;
+        }
+
+        public long Weakness(int taillePrean)
+        {
+            long probleme = Test(taillePrean);
+            List<long> rep = new List<long>();
+            for (int i = 0; i < code.Length; i++)
+            {
+                rep.Add(code[i]);
+                for (int j = i + 1; j < code.Length; j++)
+                {
+                    rep.Add(code[j]);
+                    long somme = rep.Sum();
+                    if (somme == probleme) return rep.Max() + rep.Min();
+                    else if (somme > probleme)
+                    {
+                        break;
+                    }
+                }
+                rep.Clear();
+            }
+            return -1;
         }
     }
 }

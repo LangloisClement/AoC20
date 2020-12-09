@@ -45,7 +45,7 @@ namespace AoC20
 
             //DAY 9
             Day9 day9 = new Day9("../../Input/inputD9.txt");
-            Console.WriteLine(day9.Test(25));
+            Console.WriteLine(day9.Weakness(25));
 
 
             Console.ReadLine();
