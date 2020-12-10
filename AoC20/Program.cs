@@ -44,9 +44,11 @@ namespace AoC20
             //Console.WriteLine(day8.Repair());
 
             //DAY 9
-            Day9 day9 = new Day9("../../Input/inputD9.txt");
-            Console.WriteLine(day9.Weakness(25));
+            //Day9 day9 = new Day9("../../Input/inputD9.txt");
+            //Console.WriteLine(day9.Weakness(25));
 
+            //DAY 10
+            Console.WriteLine(new Day10("../../Input/inputD10.txt").Test());
 
             Console.ReadLine();
         }
