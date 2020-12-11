@@ -196,515 +196,100 @@ namespace AoC20
         private int NbrVoisinLigne(int i, int j)
         {
             int r = 0, k = 0, l = 0;
-            if (i == 0 && j == 0)
+            //diag hg
+            while (true)
             {
-                //a droite
-                while (true)
+                k--; l--;
+                if (i + k < 0 || j + l < 0 || terrain[i + k, j + l] == 'L') break;
+                if (terrain[i + k, j + l] == '#')
                 {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bd
-                while (true)
-                {
-                    k++; l++;
-                    if (i + k >= terrain.GetLength(0) || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
-            else if (i == 0 && j == terrain.GetLength(1) - 1)
+            k = 0; l = 0;
+            //en haut
+            while (true)
             {
-                //a gauche
-                while (true)
+                k--;
+                if (i + k < 0 || terrain[i + k, j] == 'L') break;
+                if (terrain[i + k, j] == '#')
                 {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //diag bg
-                while (true)
-                {
-                    k++; l--;
-                    if (i + k >= terrain.GetLength(0) || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
-            else if (i == terrain.GetLength(0) - 1 && j == 0)
+            k = 0; l = 0;
+            //diag hd
+            while (true)
             {
-                //en haut
-                while (true)
+                k--; l++;
+                if (i + k < 0 || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
+                if (terrain[i + k, j + l] == '#')
                 {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //diag hd
-                while (true)
-                {
-                    k--; l++;
-                    if (i + k < 0 || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a droite
-                while (true)
-                {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
-            else if (i == terrain.GetLength(0) - 1 && j == terrain.GetLength(1) - 1)
+            k = 0; l = 0;
+            //a gauche
+            while (true)
             {
-                //diag hg
-                while (true)
+                l--;
+                if (j + l < 0 || terrain[i, j + l] == 'L') break;
+                if (terrain[i, j + l] == '#')
                 {
-                    k--; l--;
-                    if (i + k < 0 || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //en haut
-                while (true)
-                {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a gauche
-                while (true)
-                {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
-            else if (i == 0)
+            k = 0; l = 0;
+            //a doite
+            while (true)
             {
-                //a gauche
-                while (true)
+                l++;
+                if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
+                if (terrain[i, j + l] == '#')
                 {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //a doite
-                while (true)
-                {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bg
-                while (true)
-                {
-                    k++; l--;
-                    if (i + k >= terrain.GetLength(0) || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bd
-                while (true)
-                {
-                    k++; l++;
-                    if (i + k >= terrain.GetLength(0) || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-
             }
-            else if (i == terrain.GetLength(0) - 1)
+            k = 0; l = 0;
+            //diag bg
+            while (true)
             {
-                //diag hg
-                while (true)
+                k++; l--;
+                if (i + k >= terrain.GetLength(0) || j + l < 0 || terrain[i + k, j + l] == 'L') break;
+                if (terrain[i + k, j + l] == '#')
                 {
-                    k--; l--;
-                    if (i + k < 0 || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //en haut
-                while (true)
-                {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag hd
-                while (true)
-                {
-                    k--; l++;
-                    if (i + k < 0 || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a gauche
-                while (true)
-                {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a doite
-                while (true)
-                {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
-            else if (j == 0)
+            k = 0; l = 0;
+            //en bas
+            while (true)
             {
-                //en haut
-                while (true)
+                k++;
+                if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
+                if (terrain[i + k, j] == '#')
                 {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //diag hd
-                while (true)
-                {
-                    k--; l++;
-                    if (i + k < 0 || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a droite
-                while (true)
-                {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bd
-                while (true)
-                {
-                    k++; l++;
-                    if (i + k >= terrain.GetLength(0) || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-
             }
-            else if (j == terrain.GetLength(1) - 1)
+            k = 0; l = 0;
+            //diag bd
+            while (true)
             {
-                //diag hg
-                while (true)
+                k++; l++;
+                if (i + k >= terrain.GetLength(0) || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
+                if (terrain[i + k, j + l] == '#')
                 {
-                    k--; l--;
-                    if (i + k < 0 || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
+                    r++;
+                    break;
                 }
-                k = 0; l = 0;
-                //en haut
-                while (true)
-                {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a gauche
-                while (true)
-                {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bg
-                while (true)
-                {
-                    k++; l--;
-                    if (i + k >= terrain.GetLength(0) || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-
-            }
-            else
-            {
-                //diag hg
-                while (true)
-                {
-                    k--; l--;
-                    if (i + k < 0 || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en haut
-                while (true)
-                {
-                    k--;
-                    if (i + k < 0 || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag hd
-                while (true)
-                {
-                    k--; l++;
-                    if (i + k < 0 || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a gauche
-                while (true)
-                {
-                    l--;
-                    if (j + l < 0 || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //a doite
-                while (true)
-                {
-                    l++;
-                    if (j + l >= terrain.GetLength(1) || terrain[i, j + l] == 'L') break;
-                    if (terrain[i, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bg
-                while (true)
-                {
-                    k++; l--;
-                    if (i + k >= terrain.GetLength(0) || j + l < 0 || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //en bas
-                while (true)
-                {
-                    k++;
-                    if (i + k >= terrain.GetLength(0) || terrain[i + k, j] == 'L') break;
-                    if (terrain[i + k, j] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
-                //diag bd
-                while (true)
-                {
-                    k++; l++;
-                    if (i + k >= terrain.GetLength(0) || j + l >= terrain.GetLength(1) || terrain[i + k, j + l] == 'L') break;
-                    if (terrain[i + k, j + l] == '#')
-                    {
-                        r++;
-                        break;
-                    }
-                }
-                k = 0; l = 0;
             }
             return r;
         }

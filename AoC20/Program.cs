@@ -51,7 +51,7 @@ namespace AoC20
             //Console.WriteLine(new Day10("../../Input/inputD10.txt").Part2());
 
             //DAY 11
-            Console.WriteLine(new Day11("../../Input/Day11/test.txt").Part2());
+            Console.WriteLine(new Day11("../../Input/Day11/inputD11.txt").Part2());
 
             Console.ReadLine();
         }
