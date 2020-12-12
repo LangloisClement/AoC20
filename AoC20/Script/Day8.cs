@@ -6,33 +6,34 @@ using System.Threading.Tasks;
 
 namespace AoC20
 {
-    class Instruction
+    class Instruction //instruction in the game programme
     {
         string typeInst;
         int valeur;
-        bool exe = false;
+        bool exe = false; //if has already been read
 
-        public Instruction(string type, int valeur)
+        public Instruction(string type, int valeur) //constructor
         {
             this.typeInst = type;
             this.valeur = valeur;
         }
 
+        //properties
         public int Valeur { get => valeur; set => valeur = value; }
         public bool Exe { get => exe; set => exe = value; }
-        internal string TypeInst { get => typeInst; set => typeInst = value; }
+        public string TypeInst { get => typeInst; set => typeInst = value; }
     }
 
 
     class Day8
     {
-        List<Instruction> prog = new List<Instruction>();
-        bool terminate = false;
+        List<Instruction> prog = new List<Instruction>(); //game programme
+        bool terminate = false; //if programme run to completion for Part 2
 
 
-        public Day8(string addr)
+        public Day8(string addr) //constructor
         {
-            if (!System.IO.File.Exists(addr))
+            if (!System.IO.File.Exists(addr)) //check file
             {
                 prog = null;
                 Console.WriteLine("FILE NOT FOUND");
@@ -48,12 +49,12 @@ namespace AoC20
             }
         }
 
-        public int Execut()
+        public int Execut() //Part1
         {
             int r = 0;
             for (int i = 0; i < prog.Count;)
             {
-                if (prog[i].Exe) return r;
+                if (prog[i].Exe) return r; //loop detection
                 else
                 {
                     prog[i].Exe = true;
@@ -72,18 +73,18 @@ namespace AoC20
                     }
                 }
             }
-            terminate = true;
+            terminate = true; //run until the end
             return r;
         }
 
-        public int Repair()
+        public int Repair() //Part 2
         {
-            for(int i = 0; i < prog.Count; i++)
+            for (int i = 0; i < prog.Count; i++) //test each instruction
             {
                 if (prog[i].TypeInst == "jmp")
                 {
-                    prog[i].TypeInst = "nop";
-                    int r = Execut();
+                    prog[i].TypeInst = "nop"; //switch type
+                    int r = Execut(); //test
                     if (terminate) return r;
                     else prog[i].TypeInst = "jmp";
                 }
@@ -94,7 +95,7 @@ namespace AoC20
                     if (terminate) return r;
                     else prog[i].TypeInst = "nop";
                 }
-                foreach (var inst in prog) inst.Exe = false;
+                foreach (var inst in prog) inst.Exe = false; //reset prog
             }
             Console.WriteLine("NOPE");
             return -1;

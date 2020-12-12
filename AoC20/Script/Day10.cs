@@ -9,11 +9,11 @@ namespace AoC20
 
     class Day10
     {
-        List<int> addapteurs = new List<int>();
+        List<int> addapteurs = new List<int>(); //adaptators list
 
-        public Day10(string addr)
+        public Day10(string addr) //constructor
         {
-            if (!System.IO.File.Exists(addr))
+            if (!System.IO.File.Exists(addr)) //check file
             {
                 addapteurs = null;
                 Console.WriteLine("FILE NOT FOUND");
@@ -28,7 +28,7 @@ namespace AoC20
             }
         }
 
-        public int Test()
+        public int Test() //Part 1
         {
             addapteurs.Add(0);
             addapteurs.Sort();
@@ -44,7 +44,7 @@ namespace AoC20
                 }
             }
 
-            return ++plus3 * plus1;
+            return ++plus3 * plus1; //adding the last and returning
         }
 
         public int Combinaison()
@@ -101,7 +101,7 @@ namespace AoC20
             return r;
         }
 
-        public long Part2()
+        public long Part2() //got it from some other user on GitHub
         {
             addapteurs.Add(0);
             addapteurs.Sort();

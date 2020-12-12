@@ -10,10 +10,10 @@ namespace AoC20
     {
         long[] code;
 
-        public Day9(string addr)
+        public Day9(string addr) //constructor
         {
 
-            if (!System.IO.File.Exists(addr))
+            if (!System.IO.File.Exists(addr)) //check file
             {
                 code = null;
                 Console.WriteLine("FILE NOT FOUND");

@@ -8,13 +8,13 @@ namespace AoC20
 {
     class Day4
     {
-        List<Dictionary<string, string>> listPassport = new List<Dictionary<string, string>>();
+        List<Dictionary<string, string>> listPassport = new List<Dictionary<string, string>>(); //list of passport, a passport being a dictionary "fieldName"="filedValue", with init
 
-        public List<Dictionary<string, string>> ListPassport { get => listPassport; set => listPassport = value; }
+        public List<Dictionary<string, string>> ListPassport { get => listPassport; set => listPassport = value; } //porperty
 
-        public Day4(string addr)
+        public Day4(string addr) //constructor
         {
-            if (!System.IO.File.Exists(addr))
+            if (!System.IO.File.Exists(addr)) //check file
             {
                 Console.WriteLine("FILE NOT FOUND");
                 listPassport = null;
@@ -23,16 +23,16 @@ namespace AoC20
             {
                 string[] data = System.IO.File.ReadAllLines(addr);
                 int i = 0;
-                listPassport.Add(new Dictionary<string, string>());
+                listPassport.Add(new Dictionary<string, string>()); //init first dict
                 while (i < data.Length)
                 {
-                    if (data[i] == "") listPassport.Add(new Dictionary<string, string>());
+                    if (data[i] == "") listPassport.Add(new Dictionary<string, string>()); //if last dict if finish, then add new one
                     else
                     {
-                        string[] temp = data[i].Split(' ');
+                        string[] temp = data[i].Split(' '); //parsing field: value
                         foreach (string s in temp)
                         {
-                            listPassport[listPassport.Count - 1][s.Split(':')[0]] = s.Split(':')[1];
+                            listPassport[listPassport.Count - 1][s.Split(':')[0]] = s.Split(':')[1]; //adding field:value to last dict in list
                         }
                     }
                     i++;
@@ -40,53 +40,44 @@ namespace AoC20
             }
         }
 
-        public int NbrValide()
+        public int NbrValide() //Part 1
+        {
+            int r = 0;
+            if (listPassport == null) return -1; //securrity
+            foreach (var pass in listPassport)
+            {
+                if (pass.Count == 8) r++; //if all field
+                else if (pass.Count == 7 && !pass.ContainsKey("cid")) r++; //if all field but cid
+            }
+            return r;
+        }
+
+        public int Verrif() //Part 2
         {
             int r = 0;
             if (listPassport == null) return -1;
             foreach (var pass in listPassport)
             {
-                if (pass.Count == 8) r++;
-                else if (pass.Count == 7 && !pass.ContainsKey("cid")) r++;
-            }
-            return r;
-        }
-
-        public int Verrif()
-        {
-            int r = 0, i = 0;
-            if (listPassport == null) return -1;
-            foreach (var pass in listPassport)
-            {
-                
-                if (pass.Count == 8 || (pass.Count == 7 && !pass.ContainsKey("cid")))
+                if (pass.Count == 8 || (pass.Count == 7 && !pass.ContainsKey("cid"))) //if all field but cid
                 {
-                    i++;
-                    VerrifByr(pass["byr"]);
-                    VerrifIyr(pass["iyr"]);
-                    VerrifEyr(pass["eyr"]);
-                    VerrifHgt(pass["hgt"]);
-                    VerrifHcl(pass["hcl"]);
-                    VerrifEcl(pass["ecl"]);
-                    VerrifPid(pass["pid"]);
+                    //check all field value
                     if (VerrifByr(pass["byr"]) && VerrifIyr(pass["iyr"]) && VerrifEyr(pass["eyr"]) && VerrifHgt(pass["hgt"]) && VerrifHcl(pass["hcl"]) && VerrifEcl(pass["ecl"]) && VerrifPid(pass["pid"])) r++;
                 }
             }
             return r;
         }
 
-        private bool VerrifPid(string v)
+        private bool VerrifPid(string v) //check Pid
         {
-            if (v.Length != 9) return false;
-            if (!Int32.TryParse(v, out int i)) return false;
-            return true;
+            if (v.Length != 9) return false; //if not the correct lenght
+            return int.TryParse(v, out int i); //if a number
         }
 
-        private bool VerrifEcl(string v)
+        private bool VerrifEcl(string v) //check Ecl
         {
             switch (v)
             {
-                case "amb":
+                case "amb": //all valid color
                 case "blu":
                 case "brn":
                 case "gry":
@@ -94,21 +85,19 @@ namespace AoC20
                 case "hzl":
                 case "oth":
                     return true;
-                    break;
-                default:
+                default: //else
                     return false;
-                    break;
             }
         }
 
-        private bool VerrifHcl(string v)
+        private bool VerrifHcl(string v) //check Hcl
         {
-            if (v[0] != '#' || v.Length != 7) return false;
+            if (v[0] != '#' || v.Length != 7) return false; //if long enough and start with #
             foreach (char c in v)
             {
                 switch (c)
                 {
-                    case '#':
+                    case '#': //if is an hex char
                     case '0':
                     case '1':
                     case '2':
@@ -128,19 +117,18 @@ namespace AoC20
                         break;
                     default:
                         return false;
-                        break;
                 }
             }
             return true;
         }
 
-        private bool VerrifHgt(string v)
+        private bool VerrifHgt(string v) //check Hgt
         {
-            if (v.EndsWith("cm"))
+            if (v.EndsWith("cm")) //test unit
             {
-                if (Int32.TryParse(v.Remove(v.Length - 2), out int h))
+                if (Int32.TryParse(v.Remove(v.Length - 2), out int h)) //if a number
                 {
-                    return h >= 150 && h <= 193;
+                    return h >= 150 && h <= 193; //test range
                 }
                 else return false;
             }
@@ -155,29 +143,29 @@ namespace AoC20
             else return false;
         }
 
-        private bool VerrifEyr(string v)
+        private bool VerrifEyr(string v) //check Eyr
         {
-            if (Int32.TryParse(v, out int eyr))
+            if (Int32.TryParse(v, out int eyr)) //if a number
             {
-                return eyr >= 2020 && eyr <= 2030;
+                return eyr >= 2020 && eyr <= 2030; //test range
             }
             else return false;
         }
 
-        private bool VerrifIyr(string v)
+        private bool VerrifIyr(string v) //check Iyr
         {
-            if (Int32.TryParse(v, out int iyr))
+            if (Int32.TryParse(v, out int iyr)) //if a number
             {
-                return iyr >= 2010 && iyr <= 2020;
+                return iyr >= 2010 && iyr <= 2020; //test range
             }
             else return false;
         }
 
-        private bool VerrifByr(string v)
+        private bool VerrifByr(string v) //check Byr
         {
-            if (Int32.TryParse(v, out int byr))
+            if (Int32.TryParse(v, out int byr)) //if a number
             {
-                return byr >= 1920 && byr <= 2002;
+                return byr >= 1920 && byr <= 2002; //test range
             }
             else return false;
         }
