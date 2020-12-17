@@ -8,6 +8,7 @@ namespace AoC20
 {
     class Day13
     {
+        List<string> scheldule = new List<string>();
         List<int> busID = new List<int>();
         int time = 0;
 
@@ -24,24 +25,55 @@ namespace AoC20
                 time = int.Parse(data[0]);
                 foreach (string s in data[1].Split(','))
                 {
+                    scheldule.Add(s);
                     if (int.TryParse(s, out int n)) busID.Add(n);
                 }
             }
         }
 
-        public int Part1()
+        public int Part1
         {
-            int memo = int.MaxValue, bus = 0;
-            foreach (int n in busID)
+            get
             {
-                int next = n * ((time / n) + 1);
-                if (next < memo)
+                int memo = int.MaxValue, bus = 0;
+                foreach (int n in busID)
                 {
-                    memo = next;
-                    bus = n;
+                    int next = n * ((time / n) + 1);
+                    if (next < memo)
+                    {
+                        memo = next;
+                        bus = n;
+                    }
+                }
+                return (memo - time) * bus;
+            }
+        }
+
+        public long Part2
+        {
+            get
+            {
+                long r = 100000000000000 - 1;
+                bool flag = true;
+                while (flag && r < long.MaxValue)
+                {
+                    r++;
+                    flag = !Testlign(r);
+                }
+                return r;
+            }
+        }
+
+        private bool Testlign(long r)
+        {
+            for (int i = 0; i < scheldule.Count; i++)
+            {
+                if (int.TryParse(scheldule[i], out int n))
+                {
+                    if ((r + i) % n != 0) return false;
                 }
             }
-            return (memo - time) * bus;
+            return true;
         }
     }
 }
